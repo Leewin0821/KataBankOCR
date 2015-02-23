@@ -33,6 +33,19 @@ public class DigitsParserTest {
     }
 
     @Test
+    public void should_Return_Correct_Digits_Given_Multiple_Digits_With_Same_Number_Text_File() throws Exception {
+        //Given
+        final String MULTIPLE_DIGITS_WITH_SAME_NUMBER_TEXT_FILE_PATH = "MultipleDigitsTextFileWIthSameNumber.txt";
+        String expectedResult = "888888888";
+
+        //When
+        String actualResult = digitsParser.parse(MULTIPLE_DIGITS_WITH_SAME_NUMBER_TEXT_FILE_PATH);
+
+        //Then
+        assertThat(actualResult, is(expectedResult));
+    }
+
+    @Test
     public void should_return_correct_digits_given_multiple_digits_with_same_number() throws Exception {
         //Given
         final String MULTIPLE_DIGITS_WITH_SAME_NUMBER_TEXT_FILE_PATH = "MultipleDigitsTextFileWithSameNumber.txt";
