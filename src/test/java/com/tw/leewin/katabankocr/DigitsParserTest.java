@@ -1,6 +1,5 @@
 package com.tw.leewin.katabankocr;
 
-import com.tw.leewin.katabankocr.DigitsParser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +28,7 @@ public class DigitsParserTest {
         String expectedResult = "888888888";
 
         //When
-        String actualResult = digitsParser.parse(filePath);
+        String actualResult = digitsParser.parse(filePath).getAccountNumber();
 
         //Then
         assertThat(actualResult, is(expectedResult));
@@ -42,7 +41,7 @@ public class DigitsParserTest {
         String expectedResult = "123456789";
 
         //When
-        String actualResult = digitsParser.parse(filePath);
+        String actualResult = digitsParser.parse(filePath).getAccountNumber();
 
         //Then
         assertThat(actualResult, is(expectedResult));
@@ -52,10 +51,10 @@ public class DigitsParserTest {
     public void should_return_correct_digits_given_multiple_digits_with_error_number() throws Exception {
         //Given
         String filePath = getClass().getClassLoader().getResource("MultipleDigitsTextFileWithErrorNumber.txt").getPath();
-        String expectedResult = "12345678? ILL";
+        String expectedResult = "12345678?";
 
         //When
-        String actualResult = digitsParser.parse(filePath);
+        String actualResult = digitsParser.parse(filePath).getAccountNumber();
 
         //Then
         assertThat(actualResult, is(expectedResult));
@@ -65,10 +64,10 @@ public class DigitsParserTest {
     public void should_return_correct_digits_given_multiple_digits_with_multiple_error_numbers() throws Exception {
         //Given
         String filePath = getClass().getClassLoader().getResource("MultipleDigitsTextFileWithMultipleErrorNumbers.txt").getPath();
-        String expectedResult = "12? ILL45? ILL789";
+        String expectedResult = "12?45?789";
 
         //When
-        String actualResult = digitsParser.parse(filePath);
+        String actualResult = digitsParser.parse(filePath).getAccountNumber();
 
         //Then
         assertThat(actualResult, is(expectedResult));

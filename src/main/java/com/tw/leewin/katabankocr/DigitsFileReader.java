@@ -17,17 +17,21 @@ public class DigitsFileReader {
     private DigitsFileReader() {
     }
 
-    public List<String> readDigitFile(String filePath) throws IOException {
+    public List<String> readDigitFile(String filePath) {
         File file = new File(filePath);
-        String inputLine = "";
         ArrayList<String> list = new ArrayList<String>();
         if (file.isFile() && file.exists()) {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-            while ((inputLine = bufferedReader.readLine()) != null) {
-                System.out.println(inputLine);
-                list.add(inputLine);
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+                String inputLine;
+                while ((inputLine = bufferedReader.readLine()) != null) {
+                    System.out.println(inputLine);
+                    list.add(inputLine);
+                }
+                bufferedReader.close();
+            } catch (IOException ex) {
+                System.out.println("Reading input file failed.");
             }
-            bufferedReader.close();
         } else {
             System.out.println("No such file!");
         }

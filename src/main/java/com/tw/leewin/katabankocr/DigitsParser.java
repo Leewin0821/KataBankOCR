@@ -1,5 +1,7 @@
 package com.tw.leewin.katabankocr;
 
+import com.tw.leewin.katabankocr.domain.AccountNumber;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,16 +13,18 @@ import static com.tw.leewin.katabankocr.SymbolArray.ACCOUNT_ROW_NUMBER;
  */
 public class DigitsParser {
 
+    public static final String ILLEGIBLE_SYMBOL = "?";
     private SymbolArray symbolArray = new SymbolArray();
     private SymbolToNumberMapper mapper = new SymbolToNumberMapper();
+    private AccountNumber accountNumber = new AccountNumber();
 
-    public String parse(String filePath) throws IOException {
+    public AccountNumber parse(String filePath) {
         List<String> symbolsList = DigitsFileReader.getInstance().readDigitFile(filePath);
         symbolArray.saveSymbols(symbolsList);
         return parseSymbols();
     }
 
-    private String parseSymbols() {
+    private AccountNumber parseSymbols() {
         String symbols = "";
         for (int columnIndex = 0; columnIndex < ACCOUNT_COLUMN_NUMBER; columnIndex = columnIndex + 3) {
             String symbol = "";
@@ -32,10 +36,11 @@ public class DigitsParser {
             if (mapper.containsSymbol(symbol)){
                 symbols += mapper.getNumber(symbol);
             } else {
-                symbols += "? ILL";
+                symbols += ILLEGIBLE_SYMBOL;
             }
         }
-        return symbols;
+        accountNumber.setAccountNumber(symbols);
+        return accountNumber;
     }
 
 }

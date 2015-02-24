@@ -16,6 +16,11 @@ public class SymbolArray {
         initSymbolArray();
     }
 
+    public SymbolArray(List<String> strings) {
+        initSymbolArray();
+        saveSymbols(strings);
+    }
+
     private void initSymbolArray() {
         for (int rowIndex = 0; rowIndex < ACCOUNT_ROW_NUMBER; rowIndex++) {
             for (int columnIndex = 0; columnIndex < ACCOUNT_COLUMN_NUMBER; columnIndex++) {
