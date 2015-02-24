@@ -29,7 +29,11 @@ public class DigitsParser {
                         symbolArray.getSymbol(rowIndex, columnIndex + 1) +
                         symbolArray.getSymbol(rowIndex, columnIndex + 2);
             }
-            symbols += mapper.getNumber(symbol);
+            if (mapper.containsSymbol(symbol)){
+                symbols += mapper.getNumber(symbol);
+            } else {
+                symbols += "? ILL";
+            }
         }
         return symbols;
     }
