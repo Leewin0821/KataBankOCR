@@ -36,7 +36,12 @@ public class DigitsParser {
             if (mapper.containsSymbol(symbol)){
                 symbols += mapper.getNumber(symbol);
             } else {
-                symbols += ILLEGIBLE_SYMBOL;
+                List<String> similarSymbols = mapper.errorCorrection(symbol);
+                if (similarSymbols.size() == 0){
+                    symbols += ILLEGIBLE_SYMBOL;
+                } else {
+                    symbols += similarSymbols.get(0);
+                }
             }
         }
         accountNumber.setAccountNumber(symbols);

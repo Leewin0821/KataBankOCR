@@ -73,17 +73,17 @@ public class DigitsParserTest {
         assertThat(actualResult, is(expectedResult));
     }
 
-    @Test
-    public void should_return_correct_digits_given_recoverable_number() throws Exception {
-        //Given
-        String filePath = getClass().getClassLoader().getResource("recoverable_number.txt").getPath();
-        String expectedResult = "123456789";
-
-        //When
-        String actualResult = digitsParser.parse(filePath).getAccountNumber();
-
-        //Then
-        assertThat(actualResult, is(expectedResult));
-    }
+//    @Test
+//    public void should_return_correct_digits_given_similar_number() throws Exception {
+//        //Given
+//        String filePath = getClass().getClassLoader().getResource("similar_number.txt").getPath();
+//        String expectedResult = "123456789";
+//
+//        //When
+//        String actualResult = digitsParser.parse(filePath).getAccountNumber();
+//
+//        //Then
+//        assertThat(actualResult, is(expectedResult));
+//    }
 
 }

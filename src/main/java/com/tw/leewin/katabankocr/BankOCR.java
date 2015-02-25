@@ -13,14 +13,18 @@ public class BankOCR {
     public String printAccountNumber(String filePath) {
 
         AccountNumber accountNumber = new DigitsParser().parse(filePath);
+
         String accountNumberMessage = accountNumber.getAccountNumber();
 
         if (accountNumber.isIllegible()){
             accountNumberMessage += ILL_SUFFIX;
             return accountNumberMessage;
         }
-        if (!new AccountNumberValidator().validate(accountNumber.getAccountNumber())){
+        String validAccountNumber = new AccountNumberValidator().getValidAccountNumber(accountNumber.getAccountNumber());
+        if (validAccountNumber == null){
             accountNumberMessage += ERR_SUFFIX;
+        } else {
+            accountNumberMessage += validAccountNumber;
         }
         return accountNumberMessage;
     }
