@@ -20,12 +20,12 @@ public class BankOCR {
             accountNumberMessage += ILL_SUFFIX;
             return accountNumberMessage;
         }
-        String validAccountNumber = new AccountNumberValidator().getValidAccountNumber(accountNumber.getAccountNumber());
-        if (validAccountNumber == null){
-            accountNumberMessage += ERR_SUFFIX;
-        } else {
-            accountNumberMessage += validAccountNumber;
-        }
+//        String validAccountNumber = FuzzyCorrector.getValidAccountNumber(accountNumber.getAccountNumber());
+//        if (validAccountNumber == null){
+//            accountNumberMessage += ERR_SUFFIX;
+//        } else {
+//            accountNumberMessage += validAccountNumber;
+//        }
         return accountNumberMessage;
     }
 }
