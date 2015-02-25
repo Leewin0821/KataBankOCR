@@ -22,9 +22,9 @@ public class DigitsParserTest {
 
 
     @Test
-    public void should_return_correct_digits_given_multiple_digits_with_same_number() throws Exception {
+    public void should_return_correct_digits_given_with_same_numbers() throws Exception {
         //Given
-        String filePath = getClass().getClassLoader().getResource("MultipleDigitsTextFileWithSameNumber.txt").getPath();
+        String filePath = getClass().getClassLoader().getResource("same_numbers.txt").getPath();
         String expectedResult = "888888888";
 
         //When
@@ -35,9 +35,9 @@ public class DigitsParserTest {
     }
 
     @Test
-    public void should_return_correct_digits_given_multiple_digits_with_different_number() throws Exception {
+    public void should_return_correct_digits_given_different_numbers() throws Exception {
         //Given
-        String filePath = getClass().getClassLoader().getResource("MultipleDigitsTextFileWithDifferentNumber.txt").getPath();
+        String filePath = getClass().getClassLoader().getResource("different_numbers.txt").getPath();
         String expectedResult = "123456789";
 
         //When
@@ -48,9 +48,9 @@ public class DigitsParserTest {
     }
 
     @Test
-    public void should_return_correct_digits_given_multiple_digits_with_error_number() throws Exception {
+    public void should_return_correct_digits_given_single_error_number() throws Exception {
         //Given
-        String filePath = getClass().getClassLoader().getResource("MultipleDigitsTextFileWithErrorNumber.txt").getPath();
+        String filePath = getClass().getClassLoader().getResource("single_error_number.txt").getPath();
         String expectedResult = "12345678?";
 
         //When
@@ -61,10 +61,23 @@ public class DigitsParserTest {
     }
 
     @Test
-    public void should_return_correct_digits_given_multiple_digits_with_multiple_error_numbers() throws Exception {
+    public void should_return_correct_digits_given_multiple_error_numbers() throws Exception {
         //Given
-        String filePath = getClass().getClassLoader().getResource("MultipleDigitsTextFileWithMultipleErrorNumbers.txt").getPath();
+        String filePath = getClass().getClassLoader().getResource("multiple_error_numbers.txt").getPath();
         String expectedResult = "12?45?789";
+
+        //When
+        String actualResult = digitsParser.parse(filePath).getAccountNumber();
+
+        //Then
+        assertThat(actualResult, is(expectedResult));
+    }
+
+    @Test
+    public void should_return_correct_digits_given_recoverable_number() throws Exception {
+        //Given
+        String filePath = getClass().getClassLoader().getResource("recoverable_number.txt").getPath();
+        String expectedResult = "123456789";
 
         //When
         String actualResult = digitsParser.parse(filePath).getAccountNumber();

@@ -1,7 +1,6 @@
 package com.tw.leewin.katabankocr;
 
 import com.google.common.collect.Lists;
-import com.tw.leewin.katabankocr.domain.AccountNumber;
 
 import java.util.List;
 

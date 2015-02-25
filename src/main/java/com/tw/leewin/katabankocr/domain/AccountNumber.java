@@ -1,7 +1,5 @@
 package com.tw.leewin.katabankocr.domain;
 
-import com.tw.leewin.katabankocr.DigitsParser;
-
 import static com.tw.leewin.katabankocr.DigitsParser.ILLEGIBLE_SYMBOL;
 
 /**
@@ -18,7 +16,7 @@ public class AccountNumber {
 
     private String accountNumber;
 
-    public boolean isIllegible(){
+    public boolean isIllegible() {
         return accountNumber.contains(ILLEGIBLE_SYMBOL);
     }
 }

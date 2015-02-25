@@ -16,7 +16,7 @@ public class DigitsFileReaderTest {
 
         //Given
         DigitsFileReader reader = DigitsFileReader.getInstance();
-        String filePath = getClass().getClassLoader().getResource("ReaderTestFile.txt").getPath();
+        String filePath = getClass().getClassLoader().getResource("reader_test_file.txt").getPath();
         ImmutableList<String> expectedList = ImmutableList.of(" _ ", "|_|", "|_|");
 
         //When
