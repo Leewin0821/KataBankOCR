@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Created by lwzhang on 2/25/15.
  */
-public class FuzzyCorrector {
+public class AccountNumberCorrector {
 
     private SimilarDigitMap similarDigitMap = SimilarDigitMap.getInstance();
     private List<String> validAccountNumberSet = Lists.newLinkedList();

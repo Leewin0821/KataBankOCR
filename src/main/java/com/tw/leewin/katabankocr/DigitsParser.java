@@ -1,9 +1,11 @@
 package com.tw.leewin.katabankocr;
 
+import com.google.common.collect.Maps;
 import com.tw.leewin.katabankocr.domain.AccountNumber;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static com.tw.leewin.katabankocr.SymbolArray.ACCOUNT_COLUMN_NUMBER;
 import static com.tw.leewin.katabankocr.SymbolArray.ACCOUNT_ROW_NUMBER;
@@ -36,12 +38,7 @@ public class DigitsParser {
             if (mapper.containsSymbol(symbol)){
                 symbols += mapper.getNumber(symbol);
             } else {
-                List<String> similarSymbols = mapper.errorCorrection(symbol);
-                if (similarSymbols.size() == 0){
-                    symbols += ILLEGIBLE_SYMBOL;
-                } else {
-                    symbols += similarSymbols.get(0);
-                }
+                symbols += ILLEGIBLE_SYMBOL;
             }
         }
         accountNumber.setAccountNumber(symbols);

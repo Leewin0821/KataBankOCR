@@ -8,9 +8,9 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class FuzzyCorrectorTest {
+public class AccountNumberCorrectorTest {
 
-    private FuzzyCorrector fuzzyCorrector = new FuzzyCorrector();
+    private AccountNumberCorrector accountNumberCorrector = new AccountNumberCorrector();
 
     @Test
     public void should_return_valid_number_given_invalid_number() throws Exception {
@@ -19,7 +19,7 @@ public class FuzzyCorrectorTest {
         String expectedNumber = "200800000";
 
         //When
-        List<String> resultList = fuzzyCorrector.getValidAccountNumbers(accountNumber);
+        List<String> resultList = accountNumberCorrector.getValidAccountNumbers(accountNumber);
 
         //Then
         assertThat(resultList.size(), is(1));
@@ -33,7 +33,7 @@ public class FuzzyCorrectorTest {
         ImmutableList<String> immutableList = ImmutableList.of("888886888", "888888880", "888888988");
 
         //When
-        List<String> resultList = fuzzyCorrector.getValidAccountNumbers(accountNumber);
+        List<String> resultList = accountNumberCorrector.getValidAccountNumbers(accountNumber);
 
         //Then
         assertThat(resultList.size(), is(3));

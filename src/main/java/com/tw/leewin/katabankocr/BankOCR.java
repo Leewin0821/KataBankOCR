@@ -3,7 +3,6 @@ package com.tw.leewin.katabankocr;
 import com.tw.leewin.katabankocr.domain.AccountNumber;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by lwzhang on 2/24/15.
@@ -20,11 +19,12 @@ public class BankOCR {
         String accountNumberMessage = accountNumber.getAccountNumber();
 
         if (accountNumber.isIllegible()){
-            accountNumberMessage += ILL_SUFFIX;
-            return accountNumberMessage;
+            // TODO handle '?'
+            List<String> legibleNumbers = new SymbolCorrector().recogniseAccountNumber(accountNumber);
+
         }
         if (!AccountNumberValidator.validate(accountNumberMessage)){
-            List<String> validAccountNumbers = new FuzzyCorrector().getValidAccountNumbers(accountNumberMessage);
+            List<String> validAccountNumbers = new AccountNumberCorrector().getValidAccountNumbers(accountNumberMessage);
             if (validAccountNumbers.size() == 1){
                 return validAccountNumbers.get(0);
             } else if (validAccountNumbers.size() == 0){

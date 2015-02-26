@@ -32,13 +32,4 @@ public class SymbolToNumberMapper {
         return multiMap.get(symbol);
     }
 
-    public List<String> errorCorrection(String symbol) {
-        List<String> similarSymbolList = Lists.newArrayList();
-        for (String standard : multiMap.keySet()){
-            if (standard.contains(symbol) || symbol.contains(standard)){
-                similarSymbolList.add(standard);
-            }
-        }
-        return similarSymbolList;
-    }
 }
