@@ -30,10 +30,7 @@ public class FuzzyCorrectorTest {
     public void should_return_multiple_valid_number_given_invalid_number() throws Exception {
         //Given
         String accountNumber = "888888888";
-        String expectedNumber1 = "888886888";
-        String expectedNumber2 = "888888880";
-        String expectedNumber3 = "888888988";
-        ImmutableList<String> immutableList = ImmutableList.of(expectedNumber1, expectedNumber2, expectedNumber3);
+        ImmutableList<String> immutableList = ImmutableList.of("888886888", "888888880", "888888988");
 
         //When
         List<String> resultList = fuzzyCorrector.getValidAccountNumbers(accountNumber);

@@ -27,7 +27,7 @@ public class BankOCRTest {
         //Given
         String filePath = getClass().getClassLoader().getResource("invalid_and_legible_account_number.txt").getPath();
         BankOCR printer = new BankOCR();
-        String expectedMessage = "345882866  ERR";
+        String expectedMessage = "490067715 AMB [490867715, 490067115, 490067719]";
 
         //When
         String actualMessage = printer.printAccountNumber(filePath);

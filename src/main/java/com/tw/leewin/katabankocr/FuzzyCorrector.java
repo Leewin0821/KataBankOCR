@@ -1,23 +1,24 @@
 package com.tw.leewin.katabankocr;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
-* Created by lwzhang on 2/25/15.
-*/
+ * Created by lwzhang on 2/25/15.
+ */
 public class FuzzyCorrector {
 
     private SimilarDigitMap similarDigitMap = SimilarDigitMap.getInstance();
-    private List<String> validAccountNumberList = Lists.newArrayList();
+    private List<String> validAccountNumberSet = Lists.newLinkedList();
 
-
-    //TODO: Confirm whether need to display all alternative accountNumber options
     public List<String> getValidAccountNumbers(String accountNumber) {
         generateAlternativeAccountNumber(accountNumber);
-        return validAccountNumberList;
+        return validAccountNumberSet;
     }
 
     private void generateAlternativeAccountNumber(String accountNumber) {
@@ -28,14 +29,14 @@ public class FuzzyCorrector {
                 String alternativeAccountNumber = accountNumber.substring(0, index) +
                         alternativeDigit +
                         accountNumber.substring(index + 1);
-                checkOriginalAccountNumber(alternativeAccountNumber);
+                checkAccountNumberValidation(alternativeAccountNumber);
             }
         }
     }
 
-    private void checkOriginalAccountNumber(String accountNumber) {
+    private void checkAccountNumberValidation(String accountNumber) {
         if (AccountNumberValidator.validate(accountNumber)) {
-            validAccountNumberList.add(accountNumber);
+            validAccountNumberSet.add(accountNumber);
         }
     }
 }

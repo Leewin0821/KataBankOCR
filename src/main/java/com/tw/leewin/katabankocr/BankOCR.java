@@ -2,6 +2,9 @@ package com.tw.leewin.katabankocr;
 
 import com.tw.leewin.katabankocr.domain.AccountNumber;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by lwzhang on 2/24/15.
  */
@@ -20,12 +23,20 @@ public class BankOCR {
             accountNumberMessage += ILL_SUFFIX;
             return accountNumberMessage;
         }
-//        String validAccountNumber = FuzzyCorrector.getValidAccountNumber(accountNumber.getAccountNumber());
-//        if (validAccountNumber == null){
-//            accountNumberMessage += ERR_SUFFIX;
-//        } else {
-//            accountNumberMessage += validAccountNumber;
-//        }
-        return accountNumberMessage;
+        if (!AccountNumberValidator.validate(accountNumberMessage)){
+            List<String> validAccountNumbers = new FuzzyCorrector().getValidAccountNumbers(accountNumberMessage);
+            if (validAccountNumbers.size() == 1){
+                return validAccountNumbers.get(0);
+            } else if (validAccountNumbers.size() == 0){
+                accountNumberMessage += ERR_SUFFIX;
+                return accountNumberMessage;
+            } else {
+                String optionsAccountNumbers = " AMB "+validAccountNumbers.toString();
+                accountNumberMessage += optionsAccountNumbers;
+                return accountNumberMessage;
+            }
+        } else {
+            return accountNumberMessage;
+        }
     }
 }
