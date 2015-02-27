@@ -1,5 +1,6 @@
 package com.tw.leewin.katabankocr;
 
+import com.google.common.collect.Lists;
 import com.tw.leewin.katabankocr.domain.AccountNumber;
 
 import java.util.List;
@@ -17,25 +18,42 @@ public class BankOCR {
         AccountNumber accountNumber = new DigitsParser().parse(filePath);
 
         String accountNumberMessage = accountNumber.getAccountNumber();
-
         if (accountNumber.isIllegible()){
-            // TODO handle '?'
-            List<String> legibleNumbers = new SymbolCorrector().recogniseAccountNumber(accountNumber);
-
+            return printAccountNumberWithIllegibleSymbol(accountNumber);
+        } else if (!AccountNumberValidator.validate(accountNumberMessage)){
+            return printAccountNumberWithWrongValidation(accountNumber);
         }
-        if (!AccountNumberValidator.validate(accountNumberMessage)){
-            List<String> validAccountNumbers = new AccountNumberCorrector().getValidAccountNumbers(accountNumberMessage);
-            if (validAccountNumbers.size() == 1){
-                return validAccountNumbers.get(0);
-            } else if (validAccountNumbers.size() == 0){
-                accountNumberMessage += ERR_SUFFIX;
-                return accountNumberMessage;
-            } else {
-                String optionsAccountNumbers = " AMB "+validAccountNumbers.toString();
-                accountNumberMessage += optionsAccountNumbers;
-                return accountNumberMessage;
+        return accountNumberMessage;
+    }
+
+    private String printAccountNumberWithWrongValidation(AccountNumber accountNumber) {
+        String accountNumberMessage = accountNumber.getAccountNumber();
+        List<String> validAccountNumbers = new AccountNumberCorrector().getValidAccountNumbers(accountNumberMessage);
+        return preparePrintFormat(accountNumberMessage, validAccountNumbers, ERR_SUFFIX);
+    }
+
+    private String printAccountNumberWithIllegibleSymbol(AccountNumber accountNumber) {
+        List<String> validNumberList = Lists.newArrayList();
+        if (accountNumber.isIllegible()){
+            List<String> legibleNumbers = new SymbolCorrector().recogniseAccountNumber(accountNumber);
+            for (String legibleNumber : legibleNumbers){
+                if (AccountNumberValidator.validate(legibleNumber)){
+                    validNumberList.add(legibleNumber);
+                }
             }
+        }
+        return preparePrintFormat(accountNumber.getAccountNumber(),validNumberList, ILL_SUFFIX);
+    }
+
+    private String preparePrintFormat(String accountNumberMessage, List<String> validAccountNumbers, String type) {
+        if (validAccountNumbers.size() == 1){
+            return validAccountNumbers.get(0);
+        } else if (validAccountNumbers.size() == 0){
+            accountNumberMessage += type;
+            return accountNumberMessage;
         } else {
+            String optionsAccountNumbers = " AMB "+validAccountNumbers.toString();
+            accountNumberMessage += optionsAccountNumbers;
             return accountNumberMessage;
         }
     }

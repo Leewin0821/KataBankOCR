@@ -2,9 +2,6 @@ package com.tw.leewin.katabankocr;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Lists;
-
-import java.util.List;
 
 /**
  * Created by leewin on 15/2/24.

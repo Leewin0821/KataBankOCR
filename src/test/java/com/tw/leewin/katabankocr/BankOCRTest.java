@@ -42,7 +42,7 @@ public class BankOCRTest {
         //Given
         String filePath = getClass().getClassLoader().getResource("illegible_account_number.txt").getPath();
         BankOCR printer = new BankOCR();
-        String expectedMessage = "3458?2865  ILL";
+        String expectedMessage = "123456789";
 
         //When
         String actualMessage = printer.printAccountNumber(filePath);

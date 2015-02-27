@@ -39,6 +39,9 @@ public class DigitsParser {
                 symbols += mapper.getNumber(symbol);
             } else {
                 symbols += ILLEGIBLE_SYMBOL;
+                Map<Integer,String> illegibleSymbolMap = Maps.newHashMap();
+                illegibleSymbolMap.put(symbols.length()-1,symbol);
+                accountNumber.setIllegibleSymbolMap(illegibleSymbolMap);
             }
         }
         accountNumber.setAccountNumber(symbols);
