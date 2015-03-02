@@ -25,7 +25,7 @@ public class DigitsFileReader {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
                 String inputLine;
                 while ((inputLine = bufferedReader.readLine()) != null) {
-                    System.out.println(inputLine);
+//                    System.out.println(inputLine);
                     list.add(inputLine);
                 }
                 bufferedReader.close();
