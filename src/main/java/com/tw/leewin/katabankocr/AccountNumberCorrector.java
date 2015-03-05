@@ -35,7 +35,7 @@ public class AccountNumberCorrector {
     }
 
     private void checkAccountNumberValidation(String accountNumber) {
-        if (AccountNumberValidator.validate(accountNumber)) {
+        if (new AccountNumberValidator(accountNumber).validate()) {
             validAccountNumberSet.add(accountNumber);
         }
     }

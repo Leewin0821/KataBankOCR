@@ -12,7 +12,7 @@ public class AccountNumberValidatorTest {
         String accountNumber = "345882865";
 
         //When
-        Boolean result = AccountNumberValidator.validate(accountNumber);
+        Boolean result = new AccountNumberValidator(accountNumber).validate();
 
         //Then
         assertTrue(result);
@@ -24,7 +24,7 @@ public class AccountNumberValidatorTest {
         String accountNumber = "345882866";
 
         //When
-        Boolean result = AccountNumberValidator.validate(accountNumber);
+        Boolean result = new AccountNumberValidator(accountNumber).validate();
 
         //Then
         assertFalse(result);

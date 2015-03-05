@@ -20,7 +20,7 @@ public class BankOCR {
         String accountNumberMessage = accountNumber.getAccountNumber();
         if (accountNumber.isIllegible()){
             return printAccountNumberWithIllegibleSymbol(accountNumber);
-        } else if (!AccountNumberValidator.validate(accountNumberMessage)){
+        } else if (!new AccountNumberValidator(accountNumberMessage).validate()){
             return printAccountNumberWithWrongValidation(accountNumber);
         }
         return accountNumberMessage;
@@ -37,7 +37,7 @@ public class BankOCR {
         if (accountNumber.isIllegible()){
             List<String> legibleNumbers = new SymbolCorrector().recogniseAccountNumber(accountNumber);
             for (String legibleNumber : legibleNumbers){
-                if (AccountNumberValidator.validate(legibleNumber)){
+                if (new AccountNumberValidator(legibleNumber).validate()){
                     validNumberList.add(legibleNumber);
                 }
             }

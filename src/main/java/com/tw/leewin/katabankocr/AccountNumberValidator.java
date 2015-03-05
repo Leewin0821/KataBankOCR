@@ -1,6 +1,7 @@
 package com.tw.leewin.katabankocr;
 
 import com.google.common.collect.Lists;
+import com.tw.leewin.katabankocr.domain.AccountNumber;
 
 import java.util.List;
 
@@ -9,9 +10,16 @@ import java.util.List;
  */
 public final class AccountNumberValidator {
 
-    public static final int DIVISOR = 11;
+    private final String accountNumber;
 
-    public static boolean validate(String accountNumber) {
+    public AccountNumberValidator(String accountNumber) {
+
+        this.accountNumber = accountNumber;
+    }
+
+    private static final int DIVISOR = 11;
+
+    public boolean validate() {
         int multiple = 9;
         int sum = 0;
         for (int number : createDigitsListGivenAccountNumber(accountNumber)) {
@@ -21,7 +29,7 @@ public final class AccountNumberValidator {
         return sum % DIVISOR == 0;
     }
 
-    private static List<Integer> createDigitsListGivenAccountNumber(String accountNumber) {
+    private List<Integer> createDigitsListGivenAccountNumber(String accountNumber) {
         List<Integer> numberList = Lists.newArrayList();
         for (int index = 0; index < accountNumber.length(); index++) {
             int number = Integer.parseInt(String.valueOf(accountNumber.charAt(index)));
